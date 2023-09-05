@@ -45,9 +45,7 @@ def load_data(path):
     return df
 
 # Load data
-my_directory = os.path.dirname(__file__)
-path = os.path.join(my_directory, "data.csv")
-df = load_data(path=path)
+df = load_data(path="data.csv")
 
 
 @st.cache_data(persist=True)
