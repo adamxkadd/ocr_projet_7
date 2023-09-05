@@ -1,6 +1,5 @@
 import os
 import pickle
-import shap
 import json
 import requests
 import streamlit as st
@@ -13,6 +12,8 @@ from sklearn.model_selection import train_test_split
 import hydralit_components as hc
 import subprocess
 import sys
+import shap
+
 
 shap.initjs()
 
