@@ -29,9 +29,9 @@ run_api()
 @st.cache_data(persist=True)
 # @st.cache
 def deserialization():
-    pickle_model_objects_path = os.path.join(os.path.dirname(__file__), "features_exp.pkl")
-    with open(pickle_model_objects_path, "rb") as handle:
-        explainer, features, feature_names = pickle.load(handle)
+    file = open("features_exp.pkl", 'rb')
+    explainer, features, feature_names = pickle.load(file)
+    file.close()
     return explainer, features, feature_names
 
 # Load shap explainer
