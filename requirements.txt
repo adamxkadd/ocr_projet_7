@@ -1,6 +1,6 @@
 numpy==1.21.5
 scikit_learn==1.0.2
-alibi==0.6.4
+alibi==0.9.4
 Flask==1.1.4
 markupsafe==2.0.1
 GitPython==3.1.27
