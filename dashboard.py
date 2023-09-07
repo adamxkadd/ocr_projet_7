@@ -61,6 +61,7 @@ def model_prediction(input):
     return req["prediction"], req["probability"]
 
 def main():
+    st.set_page_config(layout="wide") 
     st.title('TABLEAU DE BORD DE NOTATION BANCAIRE')
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -68,7 +69,7 @@ def main():
             {'icon': "far fa-address-book", 'label': "Prédiction"}, 
             {'icon': "far fa-chart-bar", 'label': "Importance des Caractéristiques"},
             {'icon': "fas fa-tachometer-alt", 'label': "Analyse des Données"},
-            {'icon': "fas fa-folder-plus", 'label': "Nouveau Client"}
+            {'icon': "fas fa-folder-plus", 'label': "Nouveau Client"},
             {'icon': "far fa-list-alt", 'label': "Classement des clients"}
     ]
     
