@@ -98,9 +98,9 @@ def main():
 
     st.sidebar.header("DASHBOARD SCORING DE PRET")
     
-    upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
-    if upload_file:
-        df = pd.read_csv(upload_file)
+    # upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
+    # if upload_file:
+    #     df = pd.read_csv(upload_file)
 
 
     
