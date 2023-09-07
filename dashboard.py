@@ -77,14 +77,15 @@ def model_prediction(input):
 def main():
     # specify the primary menu definition
     menu_data = [
-            {'icon': "far fa-chart-bar", 'label':"Feature Importance"},#no tooltip message
-            {'icon': "fas fa-tachometer-alt", 'label':"Data Analysis",'ttip':"I'm the Dashboard tooltip!"},
             {'icon': "far fa-address-book", 'label':"Prediction"}, 
+            {'icon': "far fa-chart-bar", 'label':"Feature Importance"},#no tooltip message
+            {'icon': "fas fa-tachometer-alt", 'label':"Data Analysis",'ttip':"I'm the Dashboard tooltip!"},            
             {'icon': "fas fa-folder-plus",'label':"New client"}
     ]
     # we can override any part of the primary colors of the menu
     # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
     over_theme = {'txc_inactive': '#FFFFFF'}
+    title = "<h1 style='font-size: 36px;'>Dashboard</h1>"
     page = hc.option_bar(
             option_definition=menu_data,
             title='Dashboard',
