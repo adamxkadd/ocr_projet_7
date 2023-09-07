@@ -223,14 +223,14 @@ def main():
             st.expander("Afficher l'impact des caractéristiques:")
             force_plot, ax = plt.subplots()
             force_plot = shap.force_plot(
-                base_value=explainer.expected_value[pred],
-                shap_values=explainer.shap_values[pred][id_idx],
-                features=features[id_idx],
-                plot_cmap=["#00e800", "#ff2839"],
-                feature_names=feature_names,
-                matplotlib=True,
-                show=False,
-            )
+                                            base_value=explainer.expected_value[pred],
+                                            shap_values=explainer.shap_values[pred][id_idx],
+                                            features=features[id_idx],
+                                            plot_cmap=["#00e800", "#ff2839"],
+                                            feature_names=feature_names,
+                                            matplotlib=True,
+                                            show=True,
+                                        )
             st.write(force_plot)
 
             decision_plot, ax = plt.subplots()
