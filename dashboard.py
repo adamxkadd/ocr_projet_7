@@ -96,7 +96,7 @@ def main():
         horizontal_orientation=True
     )
     
-    image = st.sidebar.image('logo.png', caption='Votre légende', use_container_width=True)
+    image = st.sidebar.image('logo.png')
     st.sidebar.title("DASHBOARD SCORING DE PRET")
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
