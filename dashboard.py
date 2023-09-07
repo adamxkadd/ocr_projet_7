@@ -203,18 +203,12 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 
-        st.title(" ")
         st.header("Effectuer la prédiction pour le client : {}".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
-            df_client_input = pd.DataFrame(
-                client_input.to_numpy(),
-                index=["Information"],
-                columns=client_input.columns,
-            ).astype(str).transpose()
+            df_client_input = pd.DataFrame( client_input.to_numpy(), index=["Information"],columns=client_input.columns,).astype(str) #.transpose()
             st.dataframe(df_client_input)
 
-        
         if st.button("Prédire"):
             client_input_json = json.loads(client_input.to_json())
             pred, proba = model_prediction(client_input_json)
