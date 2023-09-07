@@ -141,7 +141,7 @@ def main():
                     else:
                         st.plotly_chart(fig, use_container_width=True)
                 else:
-                    if graphic_style == "Boîte à Moustaches":
+                    if graphic_style == "Box Plot":
                         fig = px.box(
                             df_analysis,
                             labels=options[i],
@@ -150,14 +150,14 @@ def main():
                             color="TARGET",
                             category_orders={"TARGET": ["0", "1"]},
                             color_discrete_sequence=px.colors.qualitative.Pastel2,
-                        )
+                        )                       
                     else:
                         fig = px.histogram(
                             df_analysis,
                             x=options[i],
                             color="TARGET",
                             category_orders={"TARGET": ["0", "1"]},
-                            histnorm="pourcentage",
+                            histnorm="percent",
                             nbins=10,
                             color_discrete_sequence=px.colors.qualitative.Pastel2,
                         )
