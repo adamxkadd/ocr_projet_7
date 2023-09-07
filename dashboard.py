@@ -75,6 +75,9 @@ def model_prediction(input):
 
 
 def main():
+
+    st.title('DASHBOARD SCORING BANCAIRE')
+    
     # specify the primary menu definition
     menu_data = [
             {'icon': "far fa-address-book", 'label':"Prediction"}, 
@@ -97,6 +100,7 @@ def main():
     )
 
     st.sidebar.header("DASHBOARD SCORING DE PRET")
+    st.title('DASHBOARD SCORING BANCAIRE')
     
     upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
     if upload_file:
