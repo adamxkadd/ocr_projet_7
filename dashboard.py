@@ -223,7 +223,9 @@ def main():
         client_input = X_test.iloc[[id_idx], :]
 
         st.title(" ")
-        st.header("Effectue la prediction pour le client #{}".format(client_id))
+        # st.header("Effectue la prediction pour le client : {}".format(client_id))
+        st.header("Effectue la prediction pour le client : <span style='color:green'>{}</span>".format(client_id), unsafe_allow_html=True)
+
 
         if  st.button("Predict"):
             client_input_json = json.loads(client_input.to_json())
