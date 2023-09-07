@@ -183,12 +183,12 @@ def main():
                 import plotly.io as pio
                 pio.templates.default = "none"
                 corr = df_analysis[["TARGET"] + options]
-		corr["TARGET"] = corr["TARGET"].astype(int)
+                corr["TARGET"] = corr["TARGET"].astype(int)
                 corr = corr.corr()
                 mask = np.zeros_like(corr)
                 mask[np.triu_indices_from(mask)] = True
                 fig, ax = plt.subplots()
-                sns.heatmap(corr, ax=ax, annot=True, fmt=".2f", mask=mask, center=0, cmap="coolwarm")
+                sns.heatmap(corr, ax=ax,annot=True, fmt=".2f", mask=mask, center=0, cmap="coolwarm")
                 plt.title(f"Heatmap des corrélations linéaires\n")
                 st.write(fig)
             else:
