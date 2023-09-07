@@ -235,33 +235,35 @@ def main():
 
             decision_plot, ax = plt.subplots()
             ax = shap.decision_plot(
-                base_value=explainer.expected_value[pred],
-                shap_values=explainer.shap_values[pred][id_idx],
-                features=features[id_idx],
-                feature_names=feature_names,
-                link='logit',
-            )
+                                        base_value=explainer.expected_value[pred],
+                                        shap_values=explainer.shap_values[pred][id_idx],
+                                        features=features[id_idx],
+                                        feature_names=feature_names,
+                                        link='logit',
+                                        plot_type='bar',
+                                    )
             st.pyplot(decision_plot)
 
     elif page == "Importance des Caractéristiques":
         st.title("Importance des Caractéristiques pour la Prédiction")
         n_features = st.slider(
-            "Sélectionner le nombre de caractéristiques:",
-            value=7,
-            min_value=5,
-            max_value=50,
-            step=2
-            )
+                                "Sélectionner le nombre de caractéristiques:",
+                                value=7,
+                                min_value=5,
+                                max_value=50,
+                                step=2
+                              )
         summary_plot, _ = plt.subplots(2, 1)
+        
         plt.subplot(121)
         shap.summary_plot(
-            shap_values=explainer.shap_values[1],
-            features=features,
-            feature_names=feature_names,
-            max_display=n_features,
-            plot_size=[6, 2 + (n_features/5)],
-            color_bar=False
-        )
+                            shap_values=explainer.shap_values[1],
+                            features=features,
+                            feature_names=feature_names,
+                            max_display=n_features,
+                            plot_size=[6, 2 + (n_features/5)],
+                            color_bar=False
+                        )
         plt.title("Crédit raté", size=20)
         plt.xlabel("")
         plt.ylabel("")
@@ -269,12 +271,12 @@ def main():
 
         plt.subplot(122)
         shap.summary_plot(
-            shap_values=explainer.shap_values[0],
-            features=features,
-            feature_names=feature_names,
-            max_display=n_features,
-            plot_size=[6, 2 + (n_features/5)]
-        )
+                            shap_values=explainer.shap_values[0],
+                            features=features,
+                            feature_names=feature_names,
+                            max_display=n_features,
+                            plot_size=[6, 2 + (n_features/5)]
+                        )
         plt.yticks([])
         plt.xticks([])
         plt.title("Crédit réussi", size=20)
