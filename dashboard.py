@@ -62,8 +62,8 @@ def model_prediction(input):
 
 def main():
     # st.set_page_config(layout="wide") 
-    st.title('SCORING PRET BANCAIRE')
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.title('SCORING CREDIT BANCAIRE')
+    st.title(" ")
     
     menu_data = [
             {'icon': "far fa-address-book", 'label': "Prédiction"}, 
@@ -84,7 +84,7 @@ def main():
         horizontal_orientation=True
     )
 
-    st.sidebar.header("TABLEAU DE BORD DE NOTATION BANCAIRE")
+    st.sidebar.header("DASHBORD")
     
     upload_file = st.sidebar.file_uploader("Télécharger les données", type=["csv"])
     if upload_file:
