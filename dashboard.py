@@ -102,7 +102,7 @@ def main():
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
-    if page == "Analyse de données":
+    if page == "Data Analysis":
         st.title("Data Exploration")
         data_analysis = st.sidebar.radio(
             "Choose a type of analysis:",
