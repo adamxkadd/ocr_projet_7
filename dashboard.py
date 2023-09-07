@@ -97,7 +97,7 @@ def main():
     )
     
 
-    st.sidebar.header("Dashboard Scoring de Pret:")
+    st.sidebar.title("Dashboard Scoring de Pret:")
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
@@ -258,9 +258,9 @@ def main():
             st.dataframe(df_client_input)
 
     elif page == "Feature Importance":
-        st.title("Feature importance for prediction")
+        st.title("Feature importance pour la prediction")
         n_features = st.slider(
-            "Select number of features:",
+            "Selectionner le nombre de features:",
             value=7,
             min_value=5,
             max_value=50,
