@@ -89,7 +89,7 @@ def main():
     
     page = hc.option_bar(
         option_definition=menu_data,
-        title='Dashboard',
+        # title='Dashboard',
         key='PrimaryOption',
         override_theme=over_theme,
         font_styling=font_fmt,  # Ajoutez ce paramètre à votre fonction
@@ -97,7 +97,7 @@ def main():
     )
     
 
-    st.sidebar.header("Parameters:")
+    st.sidebar.header("Dashboard Scoring de Pret:")
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
@@ -106,9 +106,9 @@ def main():
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
     if page == "Data Analysis":
-        st.title("Data Exploration")
+        st.title("Exploration des données")
         data_analysis = st.sidebar.radio(
-            "Choose a type of analysis:",
+            "Choisir le type d'analyse:",
             ["Univariate",  "Multivariate"],
             index=0,
         )
