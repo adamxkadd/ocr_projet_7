@@ -61,8 +61,8 @@ def model_prediction(input):
     return req["prediction"], req["probability"]
 
 def main():
-    st.set_page_config(layout="wide") 
-    st.title('TABLEAU DE BORD DE NOTATION BANCAIRE')
+    # st.set_page_config(layout="wide") 
+    st.title('SCORING PRET BANCAIRE')
     st.markdown("<br>", unsafe_allow_html=True)
     
     menu_data = [
