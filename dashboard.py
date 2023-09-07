@@ -14,101 +14,81 @@ import subprocess
 import sys
 import shap
 
-
 shap.initjs()
 
 URL = "http://127.0.0.1:5000/predict" 
 
 @st.cache_data(persist=True)
-# @st.cache
 def run_api():
     subprocess.Popen([sys.executable, 'api.py'])
 
 run_api()
 
 @st.cache_data(persist=True)
-# @st.cache
 def deserialization():
     file = open("features_exp.pkl", 'rb')
     explainer, features, feature_names = pickle.load(file)
     file.close()
     return explainer, features, feature_names
 
-# Load shap explainer
 explainer, features, feature_names = deserialization()
 
-
 @st.cache_data(persist=True)
-# @st.cache 
 def load_data(path):
     df = pd.read_csv(path)
     return df
 
-# Load data
 df = load_data(path="data.csv")
 
-
 @st.cache_data(persist=True)
-# @st.cache
 def split_data(df, num_rows):
     X = df.iloc[:, 2:]
     y = df["TARGET"]
     ids = df["SK_ID_CURR"]
     
-    _, X_test, _, y_test, _, ids = train_test_split(X,y,ids,test_size=0.2,random_state=42,stratify=y)
+    _, X_test, _, y_test, _, ids = train_test_split(X, y, ids, test_size=0.2, random_state=42, stratify=y)
     
     X_test = X_test.iloc[:num_rows, ]
     y_test = y_test.iloc[:num_rows, ]
     ids = list(ids[:num_rows, ])
     return X_test, y_test, ids
 
-
-# Split data
 X_test, y_test, ids = split_data(df=df, num_rows=1000)
 
-
-# @st.cache(allow_output_mutation=True)
 @st.cache_data(persist=True)
 def model_prediction(input):
-    req = requests.post(URL,json=input,timeout=120).json()
-    return req["prediction"],req["probability"]
-
+    req = requests.post(URL, json=input, timeout=120).json()
+    return req["prediction"], req["probability"]
 
 def main():
-
-    st.title('DASHBOARD SCORING BANCAIRE')
+    st.title('TABLEAU DE BORD DE NOTATION BANCAIRE')
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # specify the primary menu definition
     menu_data = [
-            {'icon': "far fa-address-book", 'label':"Prediction"}, 
-            {'icon': "far fa-chart-bar", 'label':"Feature Importance"},#no tooltip message
-            {'icon': "fas fa-tachometer-alt", 'label':"Analyse des données",'ttip':"I'm the Dashboard tooltip!"},            
-            {'icon': "fas fa-folder-plus",'label':"Nouveau client"}
+            {'icon': "far fa-address-book", 'label': "Prédiction"}, 
+            {'icon': "far fa-chart-bar", 'label': "Importance des Caractéristiques"},
+            {'icon': "fas fa-tachometer-alt", 'label': "Analyse des Données"},
+            {'icon': "fas fa-folder-plus", 'label': "Nouveau Client"}
     ]
-    # we can override any part of the primary colors of the menu
-    # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
-    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#808B96'} # 20B2AA
-    font_fmt = {'font-class':'h1','font-size':'150%'}  # Ajustez la taille de la police ici
+    
+    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'}
+    font_fmt = {'font-class': 'h1', 'font-size': '150%'}
     
     page = hc.option_bar(
         option_definition=menu_data,
-        # title='Dashboard',
         key='PrimaryOption',
         override_theme=over_theme,
-        font_styling=font_fmt,  # Ajoutez ce paramètre à votre fonction
+        font_styling=font_fmt,
         horizontal_orientation=True
     )
 
-    st.sidebar.header("DASHBOARD SCORING DE PRET")
+    st.sidebar.header("TABLEAU DE BORD DE NOTATION BANCAIRE")
     
-    upload_file = st.sidebar.file_uploader("Télécharger la data", type=["csv"])
+    upload_file = st.sidebar.file_uploader("Télécharger les données", type=["csv"])
     if upload_file:
         df_up = pd.read_csv(upload_file)
         df_analysis = df_up.copy()
 
-    # image = st.sidebar.image('logo.png')
-    
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
@@ -116,25 +96,26 @@ def main():
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
-    if page == "Analyse des données":
-        st.title("Exploration des données")
+    if page == "Analyse des Données":
+        st.title("Exploration des Données")
         data_analysis = st.sidebar.radio(
             "Choisir le type d'analyse:",
-            ["Univariate",  "Multivariate"],
+            ["Univariée", "Multivariée"],
             index=0,
         )
 
-        if data_analysis == "Univariate":
-            st.header("Analyse univariée")
+        if data_analysis == "Univariée":
+            st.header("Analyse Univariée")
             options = st.multiselect(
                 "Choisir la variable à analyser",
                 choice_list,
-                ["AMT_INCOME_TOTAL", "AMT_CREDIT", "NAME_FAMILY_STATUS", "NAME_EDUCATION_TYPE", "YEARS_BIRTH"])
+                ["AMT_INCOME_TOTAL", "AMT_CREDIT", "NAME_FAMILY_STATUS", "NAME_EDUCATION_TYPE", "YEARS_BIRTH"]
+            )
 
             if df_analysis[options].select_dtypes(include=["int64", "float64"]).shape[1] > 0:
                 graphic_style = st.sidebar.radio(
-                    "Selectionner le typde de graphique",
-                    ("Histogram", "Box Plot"),
+                    "Sélectionner le type de graphique",
+                    ("Histogramme", "Boîte à Moustaches"),
                     index=0,
                 )
 
@@ -143,14 +124,13 @@ def main():
 
             for i in range(len(options)):
                 if df_analysis[options[i]].dtype == "object":
-                    data = df_analysis.groupby("TARGET")[options[i]].value_counts().reset_index(name="percent")
-                    data["percent"] = (data["percent"] / len(df_analysis) * 100).round(1)
+                    data = df_analysis.groupby("TARGET")[options[i]].value_counts().reset_index(name="pourcentage")
+                    data["pourcentage"] = (data["pourcentage"] / len(df_analysis) * 100).round(1)
                     fig = px.bar(
                         data,
                         x=options[i],
-                        y="percent",
+                        y="pourcentage",
                         color="TARGET",
-                        #text_auto=True,
                         color_discrete_sequence=px.colors.qualitative.Pastel2,
                     )
                     if len(options) > 1:
@@ -161,7 +141,7 @@ def main():
                     else:
                         st.plotly_chart(fig, use_container_width=True)
                 else:
-                    if graphic_style == "Box Plot":
+                    if graphic_style == "Boîte à Moustaches":
                         fig = px.box(
                             df_analysis,
                             labels=options[i],
@@ -171,14 +151,13 @@ def main():
                             category_orders={"TARGET": ["0", "1"]},
                             color_discrete_sequence=px.colors.qualitative.Pastel2,
                         )
-                       
                     else:
                         fig = px.histogram(
                             df_analysis,
                             x=options[i],
                             color="TARGET",
                             category_orders={"TARGET": ["0", "1"]},
-                            histnorm="percent",
+                            histnorm="pourcentage",
                             nbins=10,
                             color_discrete_sequence=px.colors.qualitative.Pastel2,
                         )
@@ -196,7 +175,7 @@ def main():
 
             container = st.container()
             options = container.multiselect(
-                "Choose several numerical variables to analyse:",
+                "Choisir plusieurs variables numériques à analyser:",
                 num_choice_list,
                 ["AMT_INCOME_TOTAL", "AMT_CREDIT", "EXT_SOURCE_2", "EXT_SOURCE_3"],
             )
@@ -204,50 +183,48 @@ def main():
                 import plotly.io as pio
                 pio.templates.default = "none"
                 corr = df_analysis[["TARGET"] + options]
-                corr["TARGET"] = corr["TARGET"].astype(int)
+				corr["TARGET"] = corr["TARGET"].astype(int)
                 corr = corr.corr()
                 mask = np.zeros_like(corr)
                 mask[np.triu_indices_from(mask)] = True
                 fig, ax = plt.subplots()
-                sns.heatmap(corr, ax=ax,annot=True, fmt=".2f", mask=mask, center=0, cmap="coolwarm")
+                sns.heatmap(corr, ax=ax, annot=True, fmt=".2f", mask=mask, center=0, cmap="coolwarm")
                 plt.title(f"Heatmap des corrélations linéaires\n")
                 st.write(fig)
             else:
-                st.warning("Please select at least 1 feature")
+                st.warning("Veuillez sélectionner au moins 1 variable")
 
-    elif page == "Prediction":
+    elif page == "Prédiction":
         sorted_ids = sorted(ids)
-        client_id = st.selectbox("Selectionner l' ID:", sorted_ids,)
+        client_id = st.selectbox("Sélectionner l'ID du client:", sorted_ids,)
         
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 
         st.title(" ")
-        st.header("Effectue la prediction pour le client : {}".format(client_id))
+        st.header("Effectuer la prédiction pour le client : {}".format(client_id))
 
-        if  st.button("Predict"):
+        if st.button("Prédire"):
             client_input_json = json.loads(client_input.to_json())
             pred, proba = model_prediction(client_input_json)
-            # pred, proba = model_prediction(client_input)            
             
             if pred == 0:
-                st.write('<div style="color:green;text-align:center;font-size:50px;font-weight:bold;">Pret Accordé</div>', unsafe_allow_html=True)
-                st.success("Probabilté de risque : {}%".format(proba)) 
+                st.write('<div style="color:green;text-align:center;font-size:50px;font-weight:bold;">Prêt Accordé</div>', unsafe_allow_html=True)
+                st.success("Probabilité de défaut : {}%".format(proba)) 
             else:
-                st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Pret Refusé</div>', unsafe_allow_html=True)
-                st.error("Probabilté de risque : {}%".format(proba))
+                st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
+                st.error("Probabilité de défaut : {}%".format(proba))
             
-            st.expander("Show feature impact:")
+            st.expander("Afficher l'impact des caractéristiques:")
             force_plot, ax = plt.subplots()
             force_plot = shap.force_plot(
                 base_value=explainer.expected_value[pred],
                 shap_values=explainer.shap_values[pred][id_idx],
                 features=features[id_idx],
-                plot_cmap=["#00e800","#ff2839"],
+                plot_cmap=["#00e800", "#ff2839"],
                 feature_names=feature_names,
                 matplotlib=True,
                 show=False,
-                
             )
             st.write(force_plot)
 
@@ -261,33 +238,34 @@ def main():
             )
             st.pyplot(decision_plot)
 
-        with st.expander("Show client information:"):
-            df_client_input = pd.DataFrame( client_input.to_numpy(),
-                                            index=["Information"],
-                                            columns=client_input.columns,).astype(str).transpose()
-            
+        with st.expander("Afficher les informations sur le client :"):
+            df_client_input = pd.DataFrame(
+                client_input.to_numpy(),
+                index=["Information"],
+                columns=client_input.columns,
+            ).astype(str).transpose()
             st.dataframe(df_client_input)
 
-    elif page == "Feature Importance":
-        st.title("Feature importance pour la prediction")
+    elif page == "Importance des Caractéristiques":
+        st.title("Importance des Caractéristiques pour la Prédiction")
         n_features = st.slider(
-            "Selectionner le nombre de features:",
+            "Sélectionner le nombre de caractéristiques:",
             value=7,
             min_value=5,
             max_value=50,
             step=2
             )
-        summary_plot, _ = plt.subplots(2,1)
+        summary_plot, _ = plt.subplots(2, 1)
         plt.subplot(121)
         shap.summary_plot(
             shap_values=explainer.shap_values[1],
             features=features,
             feature_names=feature_names,
             max_display=n_features,
-            plot_size= [6,2+(n_features/5)],
+            plot_size=[6, 2 + (n_features/5)],
             color_bar=False
         )
-        plt.title("miss credit",size=20)
+        plt.title("Crédit raté", size=20)
         plt.xlabel("")
         plt.ylabel("")
         plt.xticks([])
@@ -298,47 +276,40 @@ def main():
             features=features,
             feature_names=feature_names,
             max_display=n_features,
-            plot_size= [6,2+(n_features/5)]
+            plot_size=[6, 2 + (n_features/5)]
         )
         plt.yticks([])
         plt.xticks([])
-        plt.title("successfull credit",size=20 )
+        plt.title("Crédit réussi", size=20)
         plt.xlabel("")
         st.pyplot(summary_plot)
 
-    elif page == "Nouveau client":
+    elif page == "Nouveau Client":
         client_median = X_test.iloc[[1],:]
-        #st.write(client_median)
-        # Giving a title 
         st.title('Simulation')
-        # creating a form
-        my_form=st.form(key='form-1')
-        # creating input fields
-        client_median['AMT_CREDIT']=my_form.text_input('Loan credit:',"20000")
-        client_median['AMT_GOODS_PRICE']=my_form.text_input('Previous credit:',"2200200")
-        client_median['AMT_ANNUITY']=my_form.text_input('AMT annuity:',"2000")
-        client_median['AMT_INCOME_TOTAL']=my_form.text_input('Income total:',"20002")
-        # creating radio button 
-        my_form.radio('Gender',('M','F'))
-        # creating slider 
-        my_form.slider('Age:',18,120,25)
+        my_form = st.form(key='form-1')
+        client_median['AMT_CREDIT'] = my_form.text_input('Crédit du prêt :', "20000")
+        client_median['AMT_GOODS_PRICE'] = my_form.text_input('Crédit précédent :', "2200200")
+        client_median['AMT_ANNUITY'] = my_form.text_input('Annuité AMT :', "2000")
+        client_median['AMT_INCOME_TOTAL'] = my_form.text_input('Revenu total :', "20002")
+        my_form.radio('Genre', ('M', 'F'))
+        my_form.slider('Âge :', 18, 120, 25)
 
-        
-        if my_form.form_submit_button('Submit'):
+        if my_form.form_submit_button('Soumettre'):
             client_input_json = json.loads(client_median.to_json())
-            pred, proba= model_prediction(client_input_json)
+            pred, proba = model_prediction(client_input_json)
             if pred == 0:
-                st.success("Loan granted (refund probability = {}%)".format(proba)) 
+                st.success("Prêt accordé (probabilité de remboursement = {}%)".format(proba)) 
             else:
-                st.error("Loan not granted (default probability = {}%)".format(proba))
+                st.error("Prêt refusé (probabilité de défaut = {}%)".format(proba))
         
-        with st.expander("Show client information:"):
+        with st.expander("Afficher les informations sur le client :"):
             df_client_input = pd.DataFrame(
                 client_median.to_numpy(),
                 index=["Information"],
                 columns=client_median.columns,
             ).astype(str).transpose()
             st.dataframe(df_client_input)
-        
+
 if __name__ == "__main__":
     main()
