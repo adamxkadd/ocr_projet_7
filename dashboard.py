@@ -217,7 +217,7 @@ def main():
 
     elif page == "Prediction":
         sorted_ids = sorted(ids)
-        client_id = st.selectbox("Select a client ID:", sorted_ids,)
+        client_id = st.selectbox("Selectionner l' ID:", sorted_ids,)
         
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
