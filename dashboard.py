@@ -39,7 +39,7 @@ explainer, features, feature_names = deserialization()
 
 
 @st.cache_data(persist=True)
-# @st.cache
+# @st.cache 
 def load_data(path):
     df = pd.read_csv(path)
     return df
