@@ -96,8 +96,8 @@ def main():
         horizontal_orientation=True
     )
     
-
-    st.sidebar.title("Dashboard Scoring de Pret:")
+    image = st.sidebar.image('logo.png', caption='Votre légende', use_container_width=True)
+    st.sidebar.title("DASHBOARD SCORING DE PRET")
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
