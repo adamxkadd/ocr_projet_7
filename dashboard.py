@@ -85,14 +85,16 @@ def main():
     # we can override any part of the primary colors of the menu
     # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
     over_theme = {'txc_inactive': '#FFFFFF'}
-    title = "<h1 style='font-size: 36px;'>Dashboard</h1>"
+    font_fmt = {'font-class':'h1','font-size':'150%'}  # Ajustez la taille de la police ici
+    
     page = hc.option_bar(
-            option_definition=menu_data,
-            title='Dashboard',
-            key='PrimaryOption',
-            override_theme=over_theme,
-            horizontal_orientation=True
-        )
+        option_definition=menu_data,
+        title='Dashboard',
+        key='PrimaryOption',
+        override_theme=over_theme,
+        font_styling=font_fmt,  # Ajoutez ce paramètre à votre fonction
+        horizontal_orientation=True
+    )
     
 
     st.sidebar.header("Parameters:")
