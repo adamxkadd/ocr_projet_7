@@ -102,7 +102,7 @@ def main():
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
-    if page == "Data Analysis":
+    if page == "Analyse de données":
         st.title("Data Exploration")
         data_analysis = st.sidebar.radio(
             "Choose a type of analysis:",
@@ -111,9 +111,9 @@ def main():
         )
 
         if data_analysis == "Univariate":
-            st.header("Univariate Analysis")
+            st.header("Analyse univariée")
             options = st.multiselect(
-                "Choose a variable to analyse",
+                "Choisir la variable à analyser",
                 choice_list,
                 ["AMT_INCOME_TOTAL", "AMT_CREDIT", "NAME_FAMILY_STATUS", "NAME_EDUCATION_TYPE", "YEARS_BIRTH"])
 
@@ -209,7 +209,7 @@ def main():
         client_input = X_test.iloc[[id_idx], :]
 
         st.title(" ")
-        st.header("Make a prediction for client #{}".format(client_id))
+        st.header("Effectue la prediction pour le client #{}".format(client_id))
 
         if  st.button("Predict"):
             client_input_json = json.loads(client_input.to_json())
