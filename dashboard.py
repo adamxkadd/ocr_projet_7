@@ -100,8 +100,8 @@ def main():
     
     upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
     if upload_file:
-        df = pd.read_csv(upload_file)
-        df_analysis = df.copy()
+        df_up = pd.read_csv(upload_file)
+        df_analysis = df_up.copy()
 
     # image = st.sidebar.image('logo.png')
     
