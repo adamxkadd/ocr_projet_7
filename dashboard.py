@@ -79,7 +79,7 @@ def main():
     menu_data = [
             {'icon': "far fa-address-book", 'label':"Prediction"}, 
             {'icon': "far fa-chart-bar", 'label':"Feature Importance"},#no tooltip message
-            {'icon': "fas fa-tachometer-alt", 'label':"Data Analysis",'ttip':"I'm the Dashboard tooltip!"},            
+            {'icon': "fas fa-tachometer-alt", 'label':"Analyse des données",'ttip':"I'm the Dashboard tooltip!"},            
             {'icon': "fas fa-folder-plus",'label':"New client"}
     ]
     # we can override any part of the primary colors of the menu
