@@ -77,6 +77,7 @@ def model_prediction(input):
 def main():
 
     st.title('DASHBOARD SCORING BANCAIRE')
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # specify the primary menu definition
     menu_data = [
@@ -87,7 +88,7 @@ def main():
     ]
     # we can override any part of the primary colors of the menu
     # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
-    over_theme = {'txc_inactive': '#FFFFFF'}
+    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#808B96'}
     font_fmt = {'font-class':'h1','font-size':'150%'}  # Ajustez la taille de la police ici
     
     page = hc.option_bar(
@@ -100,9 +101,8 @@ def main():
     )
 
     st.sidebar.header("DASHBOARD SCORING DE PRET")
-    st.title('DASHBOARD SCORING BANCAIRE')
     
-    upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
+    upload_file = st.sidebar.file_uploader("Télécharger la data", type=["csv"])
     if upload_file:
         df_up = pd.read_csv(upload_file)
         df_analysis = df_up.copy()
