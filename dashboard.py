@@ -240,7 +240,6 @@ def main():
                                         features=features[id_idx],
                                         feature_names=feature_names,
                                         link='logit',
-                                        plot_type='bar',
                                     )
             st.pyplot(decision_plot)
 
