@@ -229,7 +229,7 @@ def main():
                                             plot_cmap=["#00e800", "#ff2839"],
                                             feature_names=feature_names,
                                             matplotlib=True,
-                                            show=True,
+                                            show=False,
                                         )
             st.write(force_plot)
 
