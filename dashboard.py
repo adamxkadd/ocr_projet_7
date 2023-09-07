@@ -88,7 +88,7 @@ def main():
     ]
     # we can override any part of the primary colors of the menu
     # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
-    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#FFA07A'} #808B96 
+    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'} #808B96 
     font_fmt = {'font-class':'h1','font-size':'150%'}  # Ajustez la taille de la police ici
     
     page = hc.option_bar(
