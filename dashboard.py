@@ -95,9 +95,17 @@ def main():
         font_styling=font_fmt,  # Ajoutez ce paramètre à votre fonction
         horizontal_orientation=True
     )
+
+    st.sidebar.header("DASHBOARD SCORING DE PRET")
     
-    image = st.sidebar.image('logo.png')
-    st.sidebar.title("DASHBOARD SCORING DE PRET")
+    upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
+    if upload_file:
+        df = pd.read_csv(upload_file)
+
+
+    
+    # image = st.sidebar.image('logo.png')
+    
     df_analysis = df.copy()
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
