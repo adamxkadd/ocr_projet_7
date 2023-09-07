@@ -80,7 +80,7 @@ def main():
             {'icon': "far fa-address-book", 'label':"Prediction"}, 
             {'icon': "far fa-chart-bar", 'label':"Feature Importance"},#no tooltip message
             {'icon': "fas fa-tachometer-alt", 'label':"Analyse des données",'ttip':"I'm the Dashboard tooltip!"},            
-            {'icon': "fas fa-folder-plus",'label':"New client"}
+            {'icon': "fas fa-folder-plus",'label':"Nouveau client"}
     ]
     # we can override any part of the primary colors of the menu
     # over_theme = {'txc_inactive': '#FFFFFF','menu_background':'red','txc_active':'yellow','option_active':'blue'}
@@ -98,12 +98,10 @@ def main():
 
     st.sidebar.header("DASHBOARD SCORING DE PRET")
     
-    # upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
-    # if upload_file:
-    #     df = pd.read_csv(upload_file)
+    upload_file = st.sidebar.file_uploader("telecharger data", type=["csv"])
+    if upload_file:
+        df = pd.read_csv(upload_file)
 
-
-    
     # image = st.sidebar.image('logo.png')
     
     df_analysis = df.copy()
@@ -130,7 +128,7 @@ def main():
 
             if df_analysis[options].select_dtypes(include=["int64", "float64"]).shape[1] > 0:
                 graphic_style = st.sidebar.radio(
-                    "Select a graphic style for numerical features",
+                    "Selectionner le typde de graphique",
                     ("Histogram", "Box Plot"),
                     index=0,
                 )
@@ -303,7 +301,7 @@ def main():
         plt.xlabel("")
         st.pyplot(summary_plot)
 
-    elif page == "New client":
+    elif page == "Nouveau client":
         client_median = X_test.iloc[[1],:]
         #st.write(client_median)
         # Giving a title 
