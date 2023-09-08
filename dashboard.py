@@ -14,15 +14,11 @@ import subprocess
 import sys
 import shap
 
-shap.initjs()
 
-URL = "http://127.0.0.1:5000/predict" 
 
 @st.cache_data(persist=True)
 def run_api():
     subprocess.Popen([sys.executable, 'api.py'])
-
-run_api()
 
 @st.cache_data(persist=True)
 def deserialization():
@@ -31,15 +27,11 @@ def deserialization():
     file.close()
     return explainer, features, feature_names
 
-explainer, features, feature_names = deserialization()
-
 @st.cache_data(persist=True)
 def load_data(path):
     df = pd.read_csv(path)
     return df
-
-df = load_data(path="data.csv")
-
+	
 @st.cache_data(persist=True)
 def split_data(df, num_rows):
     X = df.iloc[:, 2:]
@@ -52,16 +44,22 @@ def split_data(df, num_rows):
     y_test = y_test.iloc[:num_rows, ]
     ids = list(ids[:num_rows, ])
     return X_test, y_test, ids
-
-X_test, y_test, ids = split_data(df=df, num_rows=1000)
-
+	
 @st.cache_data(persist=True)
 def model_prediction(input):
     req = requests.post(URL, json=input, timeout=120).json()
     return req["prediction"], req["probability"]
 
+st.set_page_config(layout="wide")
+shap.initjs()
+URL = "http://127.0.0.1:5000/predict" 
+run_api()
+explainer, features, feature_names = deserialization()
+df = load_data(path="data.csv")
+X_test, y_test, ids = split_data(df=df, num_rows=1000)
+
+
 def main():
-    # st.set_page_config(layout="wide") 
     st.title('SCORING CREDIT BANCAIRE')
     st.title(" ")
 	
