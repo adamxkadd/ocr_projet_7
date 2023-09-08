@@ -73,7 +73,7 @@ def main():
             {'icon': "far fa-list-alt", 'label': "Classement des clients"}
     ]
     
-    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#808B96'}
+    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#808B96'} # 20B2AA FFA07A
     page = hc.option_bar(
 			option_definition=menu_data,
 			key='PrimaryOption',
@@ -200,7 +200,7 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 
-        st.title("Effectuer la prédiction pour le client : {}".format(client_id))
+        st.write("Effectuer la prédiction pour le client : {}".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
             df_client_input = pd.DataFrame( client_input.to_numpy(), index=["Information"],columns=client_input.columns,).astype(str) #.transpose()
