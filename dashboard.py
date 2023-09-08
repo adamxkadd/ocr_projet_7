@@ -203,7 +203,7 @@ def main():
         client_input = X_test.iloc[[id_idx], :]
 		
         st.write("**Effectuer la prédiction pour le client :**", end='')
-		st.write('<span style="color:red;">client_id</span>', unsafe_allow_html=True)
+        st.write('<span style="color:red;">client_id</span>', unsafe_allow_html=True)
 
         st.write("Effectuer la prédiction pour le client : **{}**".format(client_id))
         
