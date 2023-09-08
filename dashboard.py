@@ -72,8 +72,8 @@ menu_data = [{'label':"Left End"},
 			{'label':"Dashboard"},
 			{'label':"Right End"},
 			]
-	menu_id = hc.nav_bar(menu_definition=menu_data)
-	st.info(f"{menu_id=}")
+menu_id = hc.nav_bar(menu_definition=menu_data)
+st.info(f"{menu_id=}")
 
     menu_data = [
             {'icon': "far fa-address-book", 'label': "Prédiction"}, 
