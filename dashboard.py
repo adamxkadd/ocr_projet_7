@@ -55,7 +55,7 @@ shap.initjs()
 URL = "http://127.0.0.1:5000/predict" 
 run_api()
 explainer, features, feature_names = deserialization()
-df = load_data(path="data.csv")
+df = load_data(path="data.csv")  
 X_test, y_test, ids = split_data(df=df, num_rows=1000)
 
 
