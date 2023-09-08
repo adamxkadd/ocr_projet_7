@@ -202,8 +202,6 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 		
-        st.markdown('**<u>',client_id,'</u>**', unsafe_allow_html=True)
-
         st.write("Effectuer la prédiction pour le client : **{}**".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
