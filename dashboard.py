@@ -65,15 +65,15 @@ def main():
     st.title('SCORING CREDIT BANCAIRE')
     st.title(" ")
 	
-    menu_data = [
+    my_menu_data = [
 				{'label':"Left End"},
 				{'label':"Book"},
 				{'label':"Component"},
 				{'label':"Dashboard"},
 				{'label':"Right End"},
 				]
-    menu_id = hc.option_bar(horizontal_orientation=True)
-    menu_id = hc.nav_bar(menu_definition=menu_data)
+    menu_id = hc.option_bar(menu_definition=my_menu_data, horizontal_orientation=True)
+    # menu_id = hc.nav_bar(menu_definition=menu_data)
     st.info(f"{menu_id=}")
 
     menu_data = [
