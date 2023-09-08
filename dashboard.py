@@ -215,7 +215,7 @@ def main():
                 st.success("Probabilité de défaut : {}%".format(proba)) 
             else:
                 st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
-                st.error("Probabilité de défaut : {}%".format(proba))
+                st.warning("Probabilité de défaut : {}%".format(proba))
             
             st.expander("Afficher l'impact des caractéristiques:")
             force_plot, ax = plt.subplots()
