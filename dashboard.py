@@ -84,34 +84,39 @@ def main():
     st.sidebar.header("DASHBORD")
     
     upload_file = st.sidebar.file_uploader("Télécharger les données", type=["csv"])
-	
     if upload_file:
         df_up = pd.read_csv(upload_file)
         df_analysis = df_up.copy()
 
     df_analysis = df.copy()
-	
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
-	    
     df_analysis.columns = df_analysis.columns.str.replace("DAYS", "YEARS")
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
     if page == "Analyse des Données":
         st.title("Exploration des Données")
-        data_analysis = st.sidebar.radio("Choisir le type d'analyse:", ["Univariée", "Multivariée"], index=0,)
+        data_analysis = st.sidebar.radio(
+            "Choisir le type d'analyse:",
+            ["Univariée", "Multivariée"],
+            index=0,
+        )
 
         if data_analysis == "Univariée":
             st.header("Analyse Univariée")
             options = st.multiselect(
-			                "Choisir la variable à analyser",
-			                choice_list,
-			                ["AMT_INCOME_TOTAL", "AMT_CREDIT", "NAME_FAMILY_STATUS", "NAME_EDUCATION_TYPE", "YEARS_BIRTH"]
-			            )
+                "Choisir la variable à analyser",
+                choice_list,
+                ["AMT_INCOME_TOTAL", "AMT_CREDIT", "NAME_FAMILY_STATUS", "NAME_EDUCATION_TYPE", "YEARS_BIRTH"]
+            )
 
             if df_analysis[options].select_dtypes(include=["int64", "float64"]).shape[1] > 0:
-                graphic_style = st.sidebar.radio("Sélectionner le type de graphique", ("Histogramme", "Boîte à Moustaches"), index=0,)
+                graphic_style = st.sidebar.radio(
+                    "Sélectionner le type de graphique",
+                    ("Histogramme", "Boîte à Moustaches"),
+                    index=0,
+                )
 
             if len(options) > 1:
                 col1, col2 = st.columns(2)
@@ -120,9 +125,14 @@ def main():
                 if df_analysis[options[i]].dtype == "object":
                     data = df_analysis.groupby("TARGET")[options[i]].value_counts().reset_index(name="pourcentage")
                     data["pourcentage"] = (data["pourcentage"] / len(df_analysis) * 100).round(1)
-                    fig = px.bar(data, x=options[i], y="pourcentage", color="TARGET", color_discrete_sequence=px.colors.qualitative.Pastel2,)
-                    
-		    if len(options) > 1:
+                    fig = px.bar(
+                        data,
+                        x=options[i],
+                        y="pourcentage",
+                        color="TARGET",
+                        color_discrete_sequence=px.colors.qualitative.Pastel2,
+                    )
+                    if len(options) > 1:
                         if i % 2 == 0:
                             col1.plotly_chart(fig, use_container_width=True)
                         else:
