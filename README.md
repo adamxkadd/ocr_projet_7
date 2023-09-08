@@ -1,7 +1,6 @@
-# Projet7-Openclassrooms
+### Openclassrooms
+# Projet7 "Implémentez un modèle de scoring" 
 Master - Data Scientist
-
 Author : KADDOURI Abdelghani
 
-Projet 7 : "Implémentez un modèle de scoring"
 ...
