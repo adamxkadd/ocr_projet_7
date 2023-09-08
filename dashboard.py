@@ -64,14 +64,16 @@ def main():
     # st.set_page_config(layout="wide") 
     st.title('SCORING CREDIT BANCAIRE')
     st.title(" ")
-    menu_data = [{'label':"Left End"},
+	
+    menu_data = [
+				{'label':"Left End"},
 				{'label':"Book"},
 				{'label':"Component"},
 				{'label':"Dashboard"},
 				{'label':"Right End"},
 				]
 	
-    menu_id = hc.nav_bar(menu_definition=menu_data)
+    menu_id = hc.nav_bar(menu_definition=menu_data, horizontal_orientation=True)
     st.info(f"{menu_id=}")
 
     menu_data = [
@@ -84,11 +86,11 @@ def main():
     
     over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'}
     page = hc.option_bar(
-        option_definition=menu_data,
-        key='PrimaryOption',
-        override_theme=over_theme,
-        horizontal_orientation=True
-    )
+							option_definition=menu_data,
+							key='PrimaryOption',
+							override_theme=over_theme,
+							horizontal_orientation=True
+						)
 
     st.sidebar.header("DASHBORD")
     
