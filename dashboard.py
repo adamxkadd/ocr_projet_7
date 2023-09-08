@@ -202,9 +202,9 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 		
-        st.markdown('**<u>test</u>**', unsafe_allow_html=True)
+        st.markdown('**<u>',client_id,'</u>**', unsafe_allow_html=True)
 
-        st.markdown("Effectuer la prédiction pour le client : **<u>{}</u>**".format(client_id))
+        st.write("Effectuer la prédiction pour le client : **{}**".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
             df_client_input = pd.DataFrame( client_input.to_numpy(), index=["Information"],columns=client_input.columns,).astype(str) #.transpose()
