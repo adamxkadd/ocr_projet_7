@@ -89,9 +89,11 @@ def main():
         df_analysis = df_up.copy()
 
     df_analysis = df.copy()
+	
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
-    df_analysis.columns = df_analysis.columns.str.replace("DAYS", "YEARS")
+    
+	df_analysis.columns = df_analysis.columns.str.replace("DAYS", "YEARS")
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
@@ -199,8 +201,10 @@ def main():
         
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
+		
+		st.write("**Effectuer la prédiction pour le client :**")
 
-        st.write("Effectuer la prédiction pour le client : {}".format(client_id))
+        st.write("Effectuer la prédiction pour le client : **{}**".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
             df_client_input = pd.DataFrame( client_input.to_numpy(), index=["Information"],columns=client_input.columns,).astype(str) #.transpose()
