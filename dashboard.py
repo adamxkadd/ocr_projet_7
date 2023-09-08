@@ -93,7 +93,7 @@ def main():
     for col in df_analysis.filter(like="DAYS").columns:
         df_analysis[col] = df_analysis[col].apply(lambda x: abs(x / 365))
     
-	df_analysis.columns = df_analysis.columns.str.replace("DAYS", "YEARS")
+    df_analysis.columns = df_analysis.columns.str.replace("DAYS", "YEARS")
     df_analysis["TARGET"] = df_analysis["TARGET"].astype(str)
     choice_list = list(df_analysis.iloc[:, 2:].columns)
 
