@@ -1,4 +1,4 @@
-alibi==0.9.4
+alibi==0.9.4 
 scikit_learn==1.0.2
 markupsafe==2.0.1
 GitPython==3.1.27
