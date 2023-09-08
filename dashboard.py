@@ -202,7 +202,7 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 		
-		st.markdown('**<u>test</u>**', unsafe_allow_html=True)
+        st.markdown('**<u>test</u>**', unsafe_allow_html=True)
 
         st.markdown("Effectuer la prédiction pour le client : **<u>{}</u>**".format(client_id))
         
