@@ -202,7 +202,7 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 		
-		st.write("**Effectuer la prédiction pour le client :**")
+        st.write("**Effectuer la prédiction pour le client :**")
 
         st.write("Effectuer la prédiction pour le client : **{}**".format(client_id))
         
