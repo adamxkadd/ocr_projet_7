@@ -200,7 +200,7 @@ def main():
         id_idx = ids.index(client_id)
         client_input = X_test.iloc[[id_idx], :]
 
-        st.header("Effectuer la prédiction pour le client : {}".format(client_id))
+        st.title("Effectuer la prédiction pour le client : {}".format(client_id))
         
         with st.expander("Afficher les informations sur le client :"):
             df_client_input = pd.DataFrame( client_input.to_numpy(), index=["Information"],columns=client_input.columns,).astype(str) #.transpose()
@@ -215,9 +215,7 @@ def main():
                 st.success("Probabilité du risque : {}%".format(proba)) 
             else:
                 st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
-                st.warning("Probabilité du risque: {}%".format(proba))
                 st.error("Probabilité du risque: {}%".format(proba))
-                st.success("Probabilité du risque : {}%".format(proba)) 
             
             st.expander("Afficher l'impact des caractéristiques:")
             force_plot, ax = plt.subplots()
