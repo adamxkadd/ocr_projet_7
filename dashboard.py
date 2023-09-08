@@ -72,7 +72,7 @@ def main():
 				{'label':"Dashboard"},
 				{'label':"Right End"},
 				]
-    menu_id = hc.option_bar(menu_definition=my_menu_data, horizontal_orientation=True)
+    menu_id = hc.option_bar(option_definition=my_menu_data, horizontal_orientation=True)
     # menu_id = hc.nav_bar(menu_definition=menu_data)
     st.info(f"{menu_id=}")
 
@@ -86,11 +86,11 @@ def main():
     
     over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'}
     page = hc.option_bar(
-							option_definition=menu_data,
-							key='PrimaryOption',
-							override_theme=over_theme,
-							horizontal_orientation=True
-						)
+			option_definition=menu_data,
+			key='PrimaryOption',
+			override_theme=over_theme,
+			horizontal_orientation=True
+			)
 
     st.sidebar.header("DASHBORD")
     
