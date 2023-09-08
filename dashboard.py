@@ -73,7 +73,7 @@ def main():
             {'icon': "far fa-list-alt", 'label': "Classement des clients"}
     ]
     
-    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'}
+    over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#FFA07A'}
     page = hc.option_bar(
 			option_definition=menu_data,
 			key='PrimaryOption',
