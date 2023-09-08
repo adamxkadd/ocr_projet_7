@@ -65,6 +65,19 @@ def main():
     st.title('SCORING CREDIT BANCAIRE')
     st.title(" ")
     
+	menu_data = [
+    {'label':"Left End"},
+    {'label':"Book"},
+    {'label':"Component"},
+    {'label':"Dashboard"},
+    {'label':"Right End"},
+	]
+
+	menu_id = hc.nav_bar(menu_definition=menu_data)
+
+	st.info(f"{menu_id=}")
+
+
     menu_data = [
             {'icon': "far fa-address-book", 'label': "Prédiction"}, 
             {'icon': "far fa-chart-bar", 'label': "Importance des Caractéristiques"},
@@ -74,13 +87,10 @@ def main():
     ]
     
     over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#20B2AA'}
-    font_fmt = {'font-class': 'h1', 'font-size': '150%'}
-    
     page = hc.option_bar(
         option_definition=menu_data,
         key='PrimaryOption',
         override_theme=over_theme,
-        font_styling=font_fmt,
         horizontal_orientation=True
     )
 
