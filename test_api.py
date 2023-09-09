@@ -1,6 +1,6 @@
 import json
 import pytest
-from your_flask_app import app
+from api.py import app
 
 # Créez un client de test Flask
 @pytest.fixture
