@@ -1,7 +1,7 @@
 import json
 import requests
 import pytest
-from your_flask_app import app
+from api import app
 
 def test_predict(client):
     # Créez des données de client factices au format JSON
