@@ -35,7 +35,7 @@ def test_predict(client):
     # data["probability"],
 
     # Vérifiez les valeurs renvoyées
-    assert "prediction" in data
-    assert "probability" in data
+    # assert "prediction" in data
+    # assert "probability" in data
     assert isinstance(data["prediction"], int)
     assert isinstance(data["probability"], float)
