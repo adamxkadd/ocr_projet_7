@@ -2,7 +2,7 @@ import json
 import pytest
 from api.py import app
 
-# Créez un client de test Flask
+# Créez un client de test Flask 
 @pytest.fixture
 def client():
     app.config["TESTING"] = True
