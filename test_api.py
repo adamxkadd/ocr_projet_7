@@ -9,19 +9,20 @@ def client():
     
 def test_predict(client):
     # Créez des données de client factices au format JSON
-    client_data = [
-        # {
-          "SK_ID_CURR": 100875,
-          "NAME_CONTRACT_TYPE": "Cash loans",
-          "AMT_INCOME_TOTAL": 20002,
-          "AMT_CREDIT": 20000,
-          "AMT_ANNUITY": 2000,
-        # }
-    ]
+    client_data = {
+        "SK_ID_CURR": 100875,
+        "NAME_CONTRACT_TYPE": "Cash loans",
+        "AMT_INCOME_TOTAL": 20002,
+        "AMT_CREDIT": 20000,
+        "AMT_ANNUITY": 2000,
+    }
+    
+    # Convertissez les données en JSON
+    client_data_json = json.dumps(client_data)
           
 
     # Convertissez les données en JSON
-    client_data_json = json.loads(client_data.to_json())
+    # client_data_json = json.loads(client_data.to_json())
     # client_data_json = json.dumps(client_data)
     
     # Envoyez une requête POST à la route /predict
