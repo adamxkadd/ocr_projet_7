@@ -3,6 +3,10 @@ import requests
 import pytest
 from api import app
 
+@pytest.fixture
+def client():
+    return app.test_client()
+    
 def test_predict(client):
     # Créez des données de client factices au format JSON
     client_data = [
