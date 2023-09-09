@@ -1,16 +1,8 @@
 import json
 import requests
 import pytest
-from api import app
+from your_flask_app import app
 
-# Créez un client de test Flask 
-@pytest.fixture
-def client():
-    app.config["TESTING"] = True
-    client = app.test_client()
-    yield client
-
-# Testez la route /predict avec des données factices
 def test_predict(client):
     # Créez des données de client factices au format JSON
     client_data = [
@@ -27,16 +19,14 @@ def test_predict(client):
     client_data_json = json.dumps(client_data)
 
     # Envoyez une requête POST à la route /predict
-    URL = "https://scoring-credit.streamlit.app/predict" 
+    URL = "https://scoring-credit.streamlit.app/predict"
     response = requests.post(URL, json=client_data_json, timeout=120)
-    # req = requests.post(URL, json=input, timeout=120).json()
-    # response = client.post(URL, data=client_data_json, content_type="application/json")
 
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
 
     # Analysez la réponse JSON
-    data = json.loads(response.data)
+    data = response.json()  # Utilisez json() au lieu de data
 
     # Vérifiez les valeurs renvoyées
     assert "prediction" in data
