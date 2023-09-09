@@ -29,8 +29,10 @@ def test_predict(client):
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
 
-    # Analysez la réponse JSON
-    data = response.json()
+    data = response
+
+    # data["prediction"], 
+    # data["probability"],
 
     # Vérifiez les valeurs renvoyées
     assert "prediction" in data
