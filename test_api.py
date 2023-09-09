@@ -26,9 +26,10 @@ def test_predict(client):
     client_data_json = json.dumps(client_data)
 
     # Envoyez une requête POST à la route /predict
-    URL = "http://127.0.0.1:5000/predict" 
+    URL = "https://scoring-credit.streamlit.app/predict" 
+    response = requests.post(URL, json=client_data_json, timeout=120)
     # req = requests.post(URL, json=input, timeout=120).json()
-    response = client.post(URL, data=client_data_json, content_type="application/json")
+    # response = client.post(URL, data=client_data_json, content_type="application/json")
 
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
