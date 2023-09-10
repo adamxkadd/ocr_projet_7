@@ -11,15 +11,18 @@ def client():
 def test_predict(client):
     # Créez des données de client factices au format JSON
     client_data = [
-    				{"SK_ID_CURR": 100875},
-    				{"NAME_CONTRACT_TYPE": "Cash loans"},
-    				{"AMT_INCOME_TOTAL": 20002},
-    				{"AMT_CREDIT": 20000},
-    				{"AMT_ANNUITY": 2000},
+        {
+            "SK_ID_CURR": 100875,
+            "NAME_CONTRACT_TYPE": "Cash loans",
+            "AMT_INCOME_TOTAL": 20002,
+            "AMT_CREDIT": 20000,
+            "AMT_ANNUITY": 2000,
+        }
     ]
 
     client_df = pd.DataFrame(client_data)
-    client_json = json.loads(client_df.to_json(orient='records'))
+    client_json = client_df.to_json(orient='records')
+    # client_json = json.loads(client_df.to_json(orient='records'))
     print("client_json : ", client_json)
     # Convertissez les données en JSON 
     # client_data_json = json.dumps(client_data)
@@ -42,24 +45,24 @@ def test_predict(client):
     
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
-
-    # Récuperation de l'element prédiction
+    
+    # Vérifiez la présence de l'élément "prediction" dans les données
     assert "prediction" in data
-
-    # Récuperation de l'element probabilité
+    
+    # Vérifiez la présence de l'élément "probability" dans les données
     assert "probability" in data
-
-    # Prédiction doit etre un entier 
+    
+    # Vérifiez que "pred" est un entier
     assert isinstance(pred, int)
-
-    # Probabilité doit etre nb reel
-    assert isinstance(proba, float)  
-
-    # Prédiction doit etre soit : 0 ou 1  
-    assert isinstance(pred, int)
-
-    # Probabilité doit etre dans une plage de 0 à 1
-    assert isinstance(proba, float) 
+    
+    # Vérifiez que "proba" est un nombre réel (float)
+    assert isinstance(proba, float)
+    
+    # Vérifiez que "pred" est soit 0 ou 1
+    assert pred in [0, 1]
+    
+    # Vérifiez que "proba" est dans la plage de 0 à 1
+    assert 0 <= proba <= 1
 
 
 
