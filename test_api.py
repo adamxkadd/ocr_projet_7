@@ -38,8 +38,11 @@ def test_predict(client):
     # Mes tests :
     ######################################################
     
-    # # Vérifiez le code de réponse HTTP
-    # assert res.status_code == 200
+    # Vérifiez le code de réponse HTTP
+    assert res.status_code == 200
+
+    # Vérification que data n'est pas vide
+    assert data is not None
     
     # # Vérifiez la présence de l'élément "prediction" dans les données
     # assert "prediction" in data
