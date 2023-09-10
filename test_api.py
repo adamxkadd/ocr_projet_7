@@ -24,22 +24,13 @@ def test_predict(client):
 
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    res = requests.post(URL, json=client_json).json()
+    res = requests.post(URL, json=client_json)
     
-    # client_df = pd.DataFrame(client_data)
-    # client_json = client_df.to_json(orient='records')
-    # # client_json = json.loads(client_df.to_json(orient='records'))
-    # print("client_json : ", client_json)
-    # # Convertissez les données en JSON 
-    # # client_data_json = json.dumps(client_data)
-
-    
-    print("affichage  :>>>>>>>")
     print("client_json : ", client_json)
-    print(res)
-    # print(res.get_data(as_text=True))
+    print("res : ", res)
+    
     data = res #.json()
-    print(data)
+    print("data : ", data)
 
     pred = data["prediction"]
     proba = data["probability"]
