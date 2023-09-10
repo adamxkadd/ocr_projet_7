@@ -22,7 +22,7 @@ def test_predict(client):
     
     client_df = pd.DataFrame(client)
     client_json = json.loads(client_df.to_json())
-    
+    print("client_json : ", client_json)
     # Convertissez les données en JSON 
     # client_data_json = json.dumps(client_data)
       
