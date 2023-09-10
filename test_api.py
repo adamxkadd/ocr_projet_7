@@ -20,11 +20,11 @@ def test_predict(client):
         }
     ]
 
-    client_json = json.loads(client)
+    client_json = json.dumps(client)
 
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    req = requests.post(URL, json=client_json, timeout=120)
+    res = requests.post(URL, json=client_json)
     
     # client_df = pd.DataFrame(client_data)
     # client_json = client_df.to_json(orient='records')
@@ -35,9 +35,10 @@ def test_predict(client):
 
     
     print("affichage  :>>>>>>>")
-    print(req)
-    print(req.get_data(as_text=True))
-    data = req.json()
+    print("client_json : ", client_json)
+    print(res)
+    print(res.get_data(as_text=True))
+    data = res.json()
     print(data)
 
     pred = data["prediction"]
@@ -48,7 +49,7 @@ def test_predict(client):
     ######################################################
     
     # Vérifiez le code de réponse HTTP
-    assert req.status_code == 200
+    assert res.status_code == 200
     
     # Vérifiez la présence de l'élément "prediction" dans les données
     assert "prediction" in data
