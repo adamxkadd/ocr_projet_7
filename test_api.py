@@ -22,25 +22,46 @@ def test_predict(client):
     
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    response = requests.post(URL, json=client_data)
+    response = client.post(URL, json=client_data)
     
 
-    print("response :>>>>>>>")
+    print("affichage  :>>>>>>>")
+    print(client_data)
     print(response)
     print(response.text)
     data = response.json()
     print(data)
+
+    pred = data["prediction"]
+    proba = data["probability"]
     
     # Mes tests :
+    
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
 
-    # Récuperation de 
+    # Récuperation de l'element prédiction
     assert "prediction" in data
+
+    # Récuperation de l'element probabilité
     assert "probability" in data
-    assert isinstance(data["prediction"], int)
-    assert isinstance(data["probability"], float)  
-    
+
+    # Prédiction doit etre un entier 
+    assert isinstance(pred, int)
+
+    # Probabilité doit etre nb reel
+    assert isinstance(proba, float)  
+
+    # Prédiction doit etre soit : 0 ou 1  
+    assert isinstance(pred, int)
+
+    # Probabilité doit etre dans une plage de 0 à 1
+    assert isinstance(proba, float) 
+
+
+
+
+
 # def test_predict(client):
 #     # Créez des données de client en df 
 #     client = [
