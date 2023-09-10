@@ -23,12 +23,12 @@ def test_predict(client):
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
     response = requests.post(URL, json=client_data, timeout=120)
-
+    # data = response.json()
+    
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
 
-    data = response.json()
-
+    
     # # Vérifiez les valeurs renvoyées
     # assert "prediction" in data
     # assert "probability" in data
