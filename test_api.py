@@ -1,6 +1,7 @@
 import json
 import requests
 import pytest
+import pandas as pd
 from api import app
 
 @pytest.fixture
