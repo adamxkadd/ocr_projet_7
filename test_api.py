@@ -29,7 +29,7 @@ def test_predict(client):
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
     response = requests.post(URL, json=client_json, timeout=120)
-    print("response : ", response)
+    print("response : ", response.text)
     
     data = response #.json()
     pred, proba = data["prediction"], data["probability"]
