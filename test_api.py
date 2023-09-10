@@ -10,7 +10,7 @@ def client():
 
 def test_predict(client):
     # Créez des données de client factices au format JSON
-    client_data = [
+    client = [
         {
             "SK_ID_CURR": 100875,
             "NAME_CONTRACT_TYPE": "Cash loans",
@@ -20,11 +20,11 @@ def test_predict(client):
         }
     ]
 
-    client_input_json = json.loads(client_data)
+    client_json = json.loads(client)
 
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    req = requests.post(URL, json=client_input_json, timeout=120)
+    req = requests.post(URL, json=client_json, timeout=120)
     
     # client_df = pd.DataFrame(client_data)
     # client_json = client_df.to_json(orient='records')
@@ -48,7 +48,7 @@ def test_predict(client):
     ######################################################
     
     # Vérifiez le code de réponse HTTP
-    assert response.status_code == 200
+    assert req.status_code == 200
     
     # Vérifiez la présence de l'élément "prediction" dans les données
     assert "prediction" in data
