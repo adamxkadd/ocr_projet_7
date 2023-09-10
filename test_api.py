@@ -26,8 +26,10 @@ def test_predict(client):
     
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
-
-    data = response.get_json()
+    print("response :>>>>>>>")
+    print(response)
+    print(response.txt)
+    data = response.json()
     
     
 # def test_predict(client):
