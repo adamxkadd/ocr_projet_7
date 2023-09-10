@@ -11,16 +11,15 @@ def client():
 def test_predict(client):
     # Créez des données de client factices au format JSON
     client_data = [
-        {
-            "SK_ID_CURR": 100875,
-            "NAME_CONTRACT_TYPE": "Cash loans",
-            "AMT_INCOME_TOTAL": 20002,
-            "AMT_CREDIT": 20000,
-            "AMT_ANNUITY": 2000,
-        }
+    				{"SK_ID_CURR": 100875},
+    				{"NAME_CONTRACT_TYPE": "Cash loans"},
+    				{"AMT_INCOME_TOTAL": 20002},
+    				{"AMT_CREDIT": 20000},
+    				{"AMT_ANNUITY": 2000},
     ]
 
     client_df = pd.DataFrame(client_data)
+    print("client_df : ", client_df)
     client_json = json.loads(client_df.to_json())
     print("client_json : ", client_json)
     # Convertissez les données en JSON 
@@ -29,7 +28,7 @@ def test_predict(client):
     
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    response = client.post(URL, json=client_json)
+    response = client.post(URL, json=client_df)
     
 
     print("affichage  :>>>>>>>")
