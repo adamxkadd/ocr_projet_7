@@ -17,7 +17,7 @@ def test_predict(client):
         "AMT_ANNUITY": 2000,
     }
     
-    # Convertissez les données en JSON
+    # Convertissez les données en JSON 
     client_data_json = json.dumps(client_data)
       
     # Envoyez une requête POST à la route /predict
