@@ -20,28 +20,32 @@ def test_predict(client):
         }
     ]
 
-    client_df = pd.DataFrame(client_data)
-    client_json = client_df.to_json(orient='records')
-    # client_json = json.loads(client_df.to_json(orient='records'))
-    print("client_json : ", client_json)
-    # Convertissez les données en JSON 
-    # client_data_json = json.dumps(client_data)
+    client_input_json = json.loads(client_data)
 
-    
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    response = client.post(URL, json=client_json)
+    req = requests.post(URL, json=client_input_json, timeout=120)
+    
+    # client_df = pd.DataFrame(client_data)
+    # client_json = client_df.to_json(orient='records')
+    # # client_json = json.loads(client_df.to_json(orient='records'))
+    # print("client_json : ", client_json)
+    # # Convertissez les données en JSON 
+    # # client_data_json = json.dumps(client_data)
+
     
     print("affichage  :>>>>>>>")
-    print(response)
-    print(response.get_data(as_text=True))
-    data = response.json()
+    print(req)
+    print(req.get_data(as_text=True))
+    data = req.json()
     print(data)
 
     pred = data["prediction"]
     proba = data["probability"]
-    
+
+    ######################################################
     # Mes tests :
+    ######################################################
     
     # Vérifiez le code de réponse HTTP
     assert response.status_code == 200
