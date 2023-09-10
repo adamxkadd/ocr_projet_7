@@ -140,7 +140,7 @@ def main():
                     else:
                         st.plotly_chart(fig, use_container_width=True)
                 else:
-                    if graphic_style == "Box Plot":
+                    if graphic_style == "Boîte à Moustaches":
                         fig = px.box(
                             df_analysis,
                             labels=options[i],
