@@ -24,13 +24,22 @@ def test_predict(client):
     URL = "https://scoring-credit.streamlit.app/predict"
     response = requests.post(URL, json=client_data)
     
-    # Vérifiez le code de réponse HTTP
-    assert response.status_code == 200
+
     print("response :>>>>>>>")
     print(response)
-    print(response.txt)
+    print(response.text)
     data = response.json()
+    print(data)
     
+    # Mes tests :
+    # Vérifiez le code de réponse HTTP
+    assert response.status_code == 200
+
+    # Récuperation de 
+    assert "prediction" in data
+    assert "probability" in data
+    assert isinstance(data["prediction"], int)
+    assert isinstance(data["probability"], float)  
     
 # def test_predict(client):
 #     # Créez des données de client en df 
