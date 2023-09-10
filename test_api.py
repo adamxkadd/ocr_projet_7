@@ -19,14 +19,21 @@ def test_predict(client):
             "AMT_ANNUITY": 2000,
         }
     ]
+
+    client_df = pd.DataFrame(client_data)
+    client_json = json.loads(client_df.to_json())
+    print("client_json : ", client_json)
+    # Convertissez les données en JSON 
+    # client_data_json = json.dumps(client_data)
+
     
     # Envoyez une requête POST à la route /predict
     URL = "https://scoring-credit.streamlit.app/predict"
-    response = client.post(URL, json=client_data)
+    response = client.post(URL, json=client_json)
     
 
     print("affichage  :>>>>>>>")
-    print(client_data)
+    print(client_json)
     print(response)
     print(response.get_data(as_text=True))
 
