@@ -8,7 +8,7 @@ def client():
     return app.test_client()
     
 def test_predict(client):
-    # Créez des données de client factices au format JSON
+    # Créez des données de client factices au format JSON 
     client_data = {
         "SK_ID_CURR": 100875,
         "NAME_CONTRACT_TYPE": "Cash loans",
