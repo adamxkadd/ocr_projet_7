@@ -260,7 +260,7 @@ def main():
                             plot_size=[6, 2 + (n_features/5)],
                             color_bar=False
                         )
-        plt.title("Crédit raté", size=20)
+        plt.title("Crédit refusé", size=20)
         plt.xlabel("")
         plt.ylabel("")
         plt.xticks([])
@@ -275,7 +275,7 @@ def main():
                         )
         plt.yticks([])
         plt.xticks([])
-        plt.title("Crédit réussi", size=20)
+        plt.title("Crédit accordé", size=20)
         plt.xlabel("")
         st.pyplot(summary_plot)
 
