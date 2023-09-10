@@ -28,7 +28,8 @@ def test_predict(client):
     print("affichage  :>>>>>>>")
     print(client_data)
     print(response)
-    print(response.text)
+    print(response.get_data(as_text=True))
+
     data = response.json()
     print(data)
 
