@@ -37,6 +37,6 @@ Liens
 -----
 - Application dashboard : https://scoring-credit.streamlit.app/
 - GitHub : https://github.com/adamxkadd/ocr_projet_7.git
-- Données Kaggle : https://www.kaggle.com/code/jsaguiar/lightgbm-with-simple-features/script
-- Vidéo démo : 
+- Données Kaggle : https://www.kaggle.com/code/jsaguiar/lightgbm-with-simple-features/script 
+- Vidéo démo :
 
