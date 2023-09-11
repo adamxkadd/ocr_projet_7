@@ -23,7 +23,7 @@ mais également permettre à leurs clients de disposer de leurs informations per
 
 Découpage des dossiers
 ----------------------
-- Kaddouri_Abdelghani_1_dashboard_et_API_082023.ipynb : L’application de dashboard interactif répondant aux spécifications ci-dessus et l’API de prédiction du score, déployées chacunes sur le cloud.
+- Kaddouri_Abdelghani_1_dashboard_et_API_082023 : L’application de dashboard interactif 
 - Kaddouri_Abdelghani_2_dossier_code_082023 : le dossier géré via un outil de versioning de code contenant :
 - dashboard.py : le code générant le dashboard
 - api.py : le code permettant de déployer le modèle sous forme d'API
