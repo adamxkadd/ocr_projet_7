@@ -212,10 +212,10 @@ def main():
             
             if pred == 0:
                 st.write('<div style="color:green;text-align:center;font-size:50px;font-weight:bold;">Prêt Accordé</div>', unsafe_allow_html=True)
-                st.success("Probabilité du risque : {}%".format(proba)) 
+                st.success("Probabilité de remboursement : {}%".format(proba)) 
             else:
                 st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
-                st.error("Probabilité du paiement: {}%".format(proba))
+                st.error("Probabilité du défaut: {}%".format(proba))
 
             with st.expander("Afficher l'impact des caractéristiques:"):
                 force_plot, ax = plt.subplots()
