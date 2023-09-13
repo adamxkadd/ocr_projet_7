@@ -217,7 +217,7 @@ def main():
                 st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
                 st.error("Probabilité du risque: {}%".format(proba))
             
-            st.expander("Afficher l'impact des caractéristiques:")
+            with st.expander("Afficher l'impact des caractéristiques:")
             force_plot, ax = plt.subplots()
             force_plot = shap.force_plot(
                                             base_value=explainer.expected_value[pred],
