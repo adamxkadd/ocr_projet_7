@@ -217,28 +217,28 @@ def main():
                 st.write('<div style="color:red;text-align:center;font-size:50px;font-weight:bold;">Prêt Refusé</div>', unsafe_allow_html=True)
                 st.error("Probabilité du risque: {}%".format(proba))
 
-	    	with st.expander("Afficher l'impact des caractéristiques:"):
-			    force_plot, ax = plt.subplots()
-				force_plot = shap.force_plot(
-											base_value=explainer.expected_value[pred],
-											shap_values=explainer.shap_values[pred][id_idx],
-											features=features[id_idx],
-											plot_cmap=["#00e800", "#ff2839"],
-											feature_names=feature_names,
-											matplotlib=True,	
-											show=False,
-				)
-		    	st.write(force_plot)
-		
-				decision_plot, ax = plt.subplots()
-				ax = shap.decision_plot(
-										base_value=explainer.expected_value[pred],
-										shap_values=explainer.shap_values[pred][id_idx],
-										features=features[id_idx],
-										feature_names=feature_names,
-										link='logit',
-										)
-				st.pyplot(decision_plot)
+            with st.expander("Afficher l'impact des caractéristiques:"):
+                force_plot, ax = plt.subplots()
+                force_plot = shap.force_plot(
+                                            base_value=explainer.expected_value[pred],
+                                            shap_values=explainer.shap_values[pred][id_idx],
+                                            features=features[id_idx],
+                                            plot_cmap=["#00e800", "#ff2839"],
+                                            feature_names=feature_names,
+                                            matplotlib=True,	
+                                            show=False,
+                                            )
+                st.write(force_plot)
+                
+                decision_plot, ax = plt.subplots()
+                ax = shap.decision_plot(
+                                        base_value=explainer.expected_value[pred],
+                                        shap_values=explainer.shap_values[pred][id_idx],
+                                        features=features[id_idx],
+                                        feature_names=feature_names,
+                                        link='logit',
+                                        )
+                st.pyplot(decision_plot)
 
     elif page == "Importance des Caractéristiques":
         st.title("Importance des Caractéristiques pour la Prédiction")
