@@ -228,7 +228,7 @@ def main():
                                             matplotlib=True,	
                                             show=False,
                                             )
-                st.write(force_plot)
+                # st.write(force_plot)
                 
                 decision_plot, ax = plt.subplots()
                 ax = shap.decision_plot(
