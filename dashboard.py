@@ -68,7 +68,7 @@ def main():
             {'icon': "far fa-chart-bar", 'label': "Importance des Caractéristiques"},
             {'icon': "fas fa-tachometer-alt", 'label': "Analyse des Données"},
             {'icon': "fas fa-folder-plus", 'label': "Nouveau Client"},
-            {'icon': "far fa-list-alt", 'label': "Classement des clients"}
+            # {'icon': "far fa-list-alt", 'label': "Classement des clients"}
     ]
     
     over_theme = {'txc_inactive': '#FFFFFF', 'menu_background': '#808B96'} # 20B2AA FFA07A
